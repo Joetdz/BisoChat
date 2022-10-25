@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .form-send-message {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 6vh;
+    margin-top: 4%;
+    justify-items: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 2%;
+    background-color: $Tertiary-color;
+
+    input {
+      all: unset;
+      padding: 2%;
+      width: 90%;
+
+      background-color: $Tertiary-color;
+    }
+  }
+
+  button {
+    all: unset;
+
+    align-items: center;
+    padding: 2%;
+    margin-top: 4%;
+    color: $Secondary-color;
+    background-color: $Primary-color;
+    border-radius: 12px;
+  }
+}

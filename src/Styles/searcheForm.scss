@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  padding: 2% 2%;
+  align-items: center;
+  justify-items: center;
+  input {
+    all: unset;
+    width: 90%;
+    height: 100%;
+    padding: 0 4%;
+  }
+  ::placeholder {
+    padding: 0 4%;
+  }
+}
