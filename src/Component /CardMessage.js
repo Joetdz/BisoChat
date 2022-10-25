@@ -7,5 +7,6 @@ const CardMessage = ({ message, direction }) => {
     </div>
   );
 };
+//
 
 export default CardMessage;
