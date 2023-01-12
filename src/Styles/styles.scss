@@ -6,18 +6,20 @@
 
 $Primary-color: #ff81ae;
 $Secondary-color: #ffffff;
-$Tertiary-color: #e9e9e9;
+$Tertiary-color: #ebe7e7;
 $Fortiary-color: #474646;
+$Backgroung-color:#00000077;
 
 body {
-  background-color: #e9e9e9;
+  background-color: $Primary-color;
 }
 
 .home {
   display: flex;
   justify-content: space-between;
-  padding: 4%;
+  padding: 2%;
   height: 100vh;
   width: 100vw;
-  gap: 2%;
+  background-color: $Tertiary-color;
+  
 }

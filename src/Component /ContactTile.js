@@ -6,26 +6,39 @@ import axios from "axios";
 const ContactTile = ({ name, image, _id }) => {
   const { currentConversationWife, setCurrentConversationWife } =
     useContext(generalContext);
-  console.log(currentConversationWife);
+
   const { userconnectedInfo } = useContext(generalContext);
+  const { currentConversationUserDetail, setCurrentConversationUserDetail } =
+    useContext(generalContext);
+  const { currentToken } = useContext(generalContext);
+  console.log(currentConversationUserDetail);
 
   const addConversation = () => {
+    console.log("les id corespond converstion courant ", _id);
+
+    console.log("utilisateur connecté", userconnectedInfo._id);
+    console.log(currentConversationWife);
     axios({
       method: "post",
-      url: "http://localhost:35000/convAdd",
+      url: `${process.env.REACT_APP_BASE_URL}/message/convAdd`,
       data: {
         moi: userconnectedInfo._id,
         corespondant: _id,
+      },
+      headers: {
+        Authorization: `${currentToken}`,
       },
     })
       .then((conversationCree) => {
         console.log(conversationCree.data);
         setCurrentConversationWife(conversationCree.data[0]);
         console.log(currentConversationWife);
+        setCurrentConversationUserDetail([image, name]);
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

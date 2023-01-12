@@ -9,7 +9,6 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
   const { SetSingUpSelected } = useContext(generalContext);
-
   console.log(name);
 
   const addUser = () => {
@@ -21,10 +20,10 @@ const Signup = () => {
 
       axios({
         method: "post",
-        url: "http://localhost:35000/signin",
+        url: ` ${process.env.REACT_APP_BASE_URL}user/signin`,
         data: {
           name: `${name}`,
-          password: ` ${password}`,
+          password: `${password}`,
           profil: `https://ui-avatars.com/api/?name=${name}&background=random`,
         },
       }).then((data) => console.log(data));

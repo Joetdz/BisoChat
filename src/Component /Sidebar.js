@@ -4,6 +4,7 @@ import { AiFillMessage } from "react-icons/ai";
 import { IoIosContacts } from "react-icons/io";
 import { generalContext } from "../GeneralContext";
 import axios from "axios";
+// import io from "socket.io-client"
 
 import Avatar from "./Avatar";
 
@@ -19,10 +20,11 @@ const Sidebar = () => {
 
   const getUserconnected = () => {
     axios
-      .get(`http://localhost:35000/user/${currentUserId}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/user/${currentUserId}`)
       .then((userconnected) => {
         console.log(userconnected);
         setUserConnectedInfo(userconnected.data[0]);
+
         setloadingUserConnectedInfo(false);
       })
       .catch((error) => {
@@ -30,11 +32,13 @@ const Sidebar = () => {
       });
   };
   useEffect(() => {
+    console.log("refresh");
     getUserconnected();
   }, []);
 
   const disconnect = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userconnectedId");
     setLogIn(false);
   };
   return (

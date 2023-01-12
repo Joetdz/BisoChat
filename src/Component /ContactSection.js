@@ -4,6 +4,7 @@ import ContactTile from "./ContactTile";
 import SearchForm from "./SearchForm";
 import axios from "axios";
 import { generalContext } from "../GeneralContext";
+import Loader from "./Loadercomponent";
 
 const ContactSection = () => {
   const { contacts, setContacts } = useContext(generalContext);
@@ -11,7 +12,7 @@ const ContactSection = () => {
   const getConversations = () => {
     axios({
       method: "get",
-      url: "http://localhost:35000/users",
+      url: "http://localhost:35000/user",
       responseType: "json",
     }).then((data) => {
       setContacts(data.data);
@@ -30,22 +31,27 @@ const ContactSection = () => {
       </div>
       <div className="recently-conversations">
         <div className="tilte">Contact Section</div>
-        <div className="conversations">
-          {isloading ? (
-            <ContactTile />
-          ) : (
-            contacts.map((contact) => {
-              return (
-                <ContactTile
-                  name={contact.name}
-                  image={contact.profil}
-                  _id={contact._id}
-                  key={contact._id}
-                />
-              );
-            })
-          )}
-        </div>
+
+        {isloading ? (
+          <div className="loader">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <div className="conversations">
+              {contacts.map((contact) => {
+                return (
+                  <ContactTile
+                    name={contact.name}
+                    image={contact.profil}
+                    _id={contact._id}
+                    key={`key , ${contact._id}`}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
