@@ -1,4 +1,4 @@
-const saveToken = (token) => {
+const saveToken = (token, isLoggedIn) => {
   return localStorage.setItem("token", token);
 };
 

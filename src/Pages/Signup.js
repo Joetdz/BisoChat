@@ -20,13 +20,15 @@ const Signup = () => {
 
       axios({
         method: "post",
-        url: ` ${process.env.REACT_APP_BASE_URL}user/signin`,
+        url: ` ${process.env.REACT_APP_BASE_URL}/user/signin`,
         data: {
           name: `${name}`,
           password: `${password}`,
           profil: `https://ui-avatars.com/api/?name=${name}&background=random`,
         },
-      }).then((data) => console.log(data));
+      })
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
     }
   };
 
