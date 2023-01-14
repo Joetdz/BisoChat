@@ -8,7 +8,7 @@ import React, { useState } from "react";
 
 function App() {
   const [sectionContactSelected, setSectionContactSelected] = useState(false);
-  const [logIn, setLogIn] = useState(false);
+  const [logIn, setLogIn] = useState(true);
   const [signUpSelected, SetSingUpSelected] = useState(false);
   console.log(signUpSelected);
   const [currentUserId, setCurrentUserId] = useState();

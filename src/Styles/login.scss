@@ -97,3 +97,12 @@
     padding: 0% 10%;
   }
 }
+
+@media screen and (max-width:500px) {
+
+  .login-page {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
