@@ -61,6 +61,7 @@
       width: 30%;
       height: 30px;
       border-radius: 8px;
+      cursor: pointer;
 
       a {
         color: $Secondary-color;
@@ -95,4 +96,13 @@
     grid-template-columns: 80%;
     padding: 0% 10%;
   }
+}
+
+@media screen and (max-width:500px) {
+
+  .login-page {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
 }

@@ -1,21 +1,23 @@
 .form {
+  all: unset;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2%;
 
   .form-send-message {
     display: flex;
     justify-content: space-between;
     width: 90%;
     height: 6vh;
-    margin-top: 4%;
+    margin-top: 0%;
     justify-items: center;
     align-items: center;
     border-radius: 12px;
     padding: 2%;
     background-color: $Tertiary-color;
 
-    input {
+    input [text] {
       all: unset;
       padding: 2%;
       width: 90%;
@@ -29,7 +31,7 @@
 
     align-items: center;
     padding: 2%;
-    margin-top: 4%;
+    margin-top: 0;
     color: $Secondary-color;
     background-color: $Primary-color;
     border-radius: 12px;

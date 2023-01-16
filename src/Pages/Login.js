@@ -4,44 +4,53 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { generalContext } from "../GeneralContext";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { accountService } from "../Services/Account.Services";
+import LoaderLogin from "../Component /LoaderLogin";
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-  const { setCurrentUserId } = useContext(generalContext);
   const { setLogIn } = useContext(generalContext);
-  const { SetSingUpSelected } = useContext(generalContext);
-  console.log(token);
+  const { SetSingUpSelected, setCurrentUserId } = useContext(generalContext);
+  const [isLoading, setIsLoading] = useState(false);
+
   const submit = () => {
-    axios({
-      method: "post",
-      url: "http://localhost:35000/login",
-      data: {
-        name: `${name}`,
-        password: ` ${password}`,
-        profil: `https://ui-avatars.com/api/?name=${name}&background=random `,
-      },
-    })
-      .then((data) => {
-        setToken(data.data.token);
-        setCurrentUserId(data.data.userId);
-        console.log(data.data.userId);
+    setIsLoading(true);
+    const notify = (message) => toast(message);
+    if (name === "" || password === "") {
+      setIsLoading(false);
+      notify("Vueillez remplir tous les champs");
+    } else {
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_BASE_URL}/user/login`,
+        data: {
+          name: name,
+          password: password,
+        },
       })
-
-      .catch((error) =>
-        console.log(error.response.status, error.response.data)
-      );
-  };
-
-  useEffect(() => {
-    let tokenLocalstorage = window.localStorage.getItem("token");
-    if (token) {
-      window.localStorage.setItem("token", token);
-      setLogIn(true);
+        .then((data) => {
+          setIsLoading(false);
+          setCurrentUserId(data.data.userId);
+          accountService.saveToken(data.data.token, data.data.userId);
+          notify("Vous êtes connecter avec succès!");
+          setTimeout(() => {
+            setLogIn(true);
+          }, 2000);
+          console.log(data);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.log(err);
+          notify(
+            err.message == "Network Error"
+              ? "Impossible de contacter le serveur"
+              : err.response.data
+          );
+        });
     }
-    if (tokenLocalstorage) setLogIn(true);
-  });
+  };
 
   return (
     <div className="login-page">
@@ -60,7 +69,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="btn-group">
-            <button onClick={submit}> se connecter</button>
+            <button onClick={submit}>
+              {isLoading ? <LoaderLogin /> : "Se connecter"}
+            </button>
+            <ToastContainer />
             <span onClick={() => SetSingUpSelected(true)}>
               <NavLink>{"S'inscrire "}</NavLink>
             </span>

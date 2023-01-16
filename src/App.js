@@ -8,16 +8,19 @@ import React, { useState } from "react";
 
 function App() {
   const [sectionContactSelected, setSectionContactSelected] = useState(false);
-  const [logIn, setLogIn] = useState(false);
+  const [logIn, setLogIn] = useState(true);
   const [signUpSelected, SetSingUpSelected] = useState(false);
   console.log(signUpSelected);
   const [currentUserId, setCurrentUserId] = useState();
   const [currentConversationWife, setCurrentConversationWife] = useState({});
-  const [contacts, setContacts] = useState();
+  const [contacts, setContacts] = useState([]);
   const [userconnectedInfo, setUserConnectedInfo] = useState();
+  const [currentConversationUserDetail, setCurrentConversationUserDetail] =
+    useState([]);
   const [conversations, setConversations] = useState();
   const [loadingUserConnectedInfo, setloadingUserConnectedInfo] =
     useState(true);
+  const [currentToken, setCurrentToken] = useState("");
 
   return (
     <generalContext.Provider
@@ -40,6 +43,10 @@ function App() {
         setConversations,
         loadingUserConnectedInfo,
         setloadingUserConnectedInfo,
+        currentConversationUserDetail,
+        setCurrentConversationUserDetail,
+        currentToken,
+        setCurrentToken,
       }}
     >
       {logIn ? <Home /> : signUpSelected ? <Signup /> : <Login />}
