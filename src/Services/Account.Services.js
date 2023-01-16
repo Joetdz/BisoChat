@@ -1,5 +1,6 @@
-const saveToken = (token, isLoggedIn) => {
-  return localStorage.setItem("token", token);
+const saveToken = (token, userId) => {
+  localStorage.setItem("token", token);
+  localStorage.setItem("userId", userId);
 };
 
 const logout = () => {

@@ -12,7 +12,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const { setLogIn } = useContext(generalContext);
-  const { SetSingUpSelected } = useContext(generalContext);
+  const { SetSingUpSelected, setCurrentUserId } = useContext(generalContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const submit = () => {
@@ -32,7 +32,8 @@ const Login = () => {
       })
         .then((data) => {
           setIsLoading(false);
-          accountService.saveToken();
+          setCurrentUserId(data.data.userId);
+          accountService.saveToken(data.data.token, data.data.userId);
           notify("Vous êtes connecter avec succès!");
           setTimeout(() => {
             setLogIn(true);
